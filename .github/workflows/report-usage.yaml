@@ -1,0 +1,55 @@
+name: Report usage
+run-name: ${{ inputs.date }}.app.log
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        required: true
+        type: string
+      logs:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: git pull --rebase origin main
+
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const fs = require("node:fs");
+
+            const date = ${{ toJson(inputs.date) }};
+            const logs = ${{ toJson(inputs.logs) }};
+
+            const file = `logs/${date}.app.log`;
+            fs.mkdirSync("logs", { recursive: true });
+
+            fs.appendFileSync(file, `${logs}\n`);
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add logs
+          git commit -m "chore: report usage" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

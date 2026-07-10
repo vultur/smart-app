@@ -1,0 +1,28 @@
+name: Deploy website
+run-name: deploy-website
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "website/**"
+
+permissions:
+  pages: write
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: "website"
+      - uses: actions/deploy-pages@v5
+        id: deployment

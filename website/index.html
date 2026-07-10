@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中小学智慧教育平台客户端</title>
+    <link rel="icon" href="./favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        :root {
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    "PingFang SC",
+                    "Hiragino Sans GB",
+                    "Microsoft YaHei",
+                    "Noto Sans CJK SC",
+                    "Source Han Sans SC",
+                    sans-serif;
+            }
+
+            html {
+                scrollbar-width: none;
+            }
+
+            ::-webkit-scrollbar {
+                display: none;
+            }
+
+            @theme {
+                --animate-fade-up: fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+                --animate-preview: preview 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+            }
+
+            @keyframes fade-up {
+                from {
+                    transform: translateY(18px);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes preview {
+                from {
+                    transform: translateY(24px);
+                    opacity: 0;
+                    filter: blur(10px);
+                }
+
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                    filter: blur(0);
+                }
+            }
+
+            @keyframes spin-glow {
+                from {
+                    transform: translate(-50%, -50%) rotate(227deg);
+                }
+
+                to {
+                    transform: translate(-50%, -50%) rotate(587deg);
+                }
+            }
+
+            .glow {
+                animation: spin-glow 6s linear infinite;
+            }
+
+            .col {
+                flex-shrink: 0;
+                box-shadow: 2px 0 0 0 var(--color-neutral-400);
+                background: linear-gradient(to right, var(--color-neutral-100), #fff);
+                width: 5rem;
+                height: 100%;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                .col {
+                    box-shadow: 2px 0 0 0 var(--color-neutral-800);
+                    background: linear-gradient(
+                        to right,
+                        var(--color-neutral-900),
+                        var(--color-neutral-950)
+                    );
+                }
+            }
+
+            @utility noise {
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.55'/%3E%3C/svg%3E");
+            }
+        </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const btn = document.querySelector("[data-download]");
+            const txt = document.querySelector("[data-label]");
+            const ico = document.querySelector("[data-icon]");
+            if (!btn || !txt || !ico) return;
+
+            const proxy = "https://gh-proxy.org";
+            const latest = "https://github.com/vultur/smart-app/releases/latest";
+            const version = `${proxy}/https://raw.githubusercontent.com/vultur/smart-app/main/version.json`;
+            const set = ({ symbol, text, platform, arch }) => {
+                ico.textContent = symbol;
+                txt.textContent = text;
+                btn.dataset.platform = platform;
+                if (arch) btn.dataset.arch = arch;
+            };
+            const asset = (version) => {
+                const platform = btn.dataset.platform;
+                const arch = btn.dataset.arch;
+
+                if (platform === "windows") return `desktop-win-x64-${version}.zip`;
+                if (platform === "mac") return `desktop-mac-${arch || "arm64"}-${version}.dmg`;
+            };
+            const arch = async () => {
+                const data = await navigator.userAgentData
+                    ?.getHighEntropyValues?.(["architecture"])
+                    .catch(() => null);
+
+                return data?.architecture || "";
+            };
+            const ready = fetch(version, { cache: "no-store" })
+                .then(async (response) => {
+                    if (!response.ok) throw new Error("获取下载地址失败");
+
+                    return (await response.json()).desktop;
+                })
+                .catch(() => "");
+            const go = async () => {
+                const desktop = await ready;
+                const name = asset(desktop);
+                if (!desktop || !name) throw new Error("获取下载地址失败");
+
+                const url = `${latest.replace("/latest", "")}/download/desktop-${desktop}/${name}`;
+                location.href = `${proxy}/${url}`;
+            };
+            const os = navigator.userAgentData?.platform || navigator.platform || "";
+            const isWindows = /win/i.test(os);
+            const isMac = /mac/i.test(os);
+
+            btn.addEventListener("click", async () => {
+                const text = txt.textContent;
+                btn.disabled = true;
+                txt.textContent = "准备下载...";
+
+                try {
+                    await go();
+                } catch {
+                    txt.textContent = "前往下载";
+                    location.href = latest;
+                } finally {
+                    btn.disabled = false;
+                    setTimeout(() => {
+                        txt.textContent = text;
+                    }, 1200);
+                }
+            });
+
+            if (isMac) {
+                set({ symbol: "⌘", text: "下载 Mac 版", platform: "mac" });
+                const cpu = await arch();
+
+                if (/arm|aarch/i.test(cpu)) {
+                    set({
+                        symbol: "⌘",
+                        text: "下载 Mac 版（Apple 芯片）",
+                        platform: "mac",
+                        arch: "arm64",
+                    });
+                    return;
+                }
+
+                if (/x86|x64|amd64/i.test(cpu)) {
+                    set({
+                        symbol: "⌘",
+                        text: "下载 Mac 版（Intel 芯片）",
+                        platform: "mac",
+                        arch: "x64",
+                    });
+                }
+
+                return;
+            }
+
+            if (isWindows) {
+                set({ symbol: "⊞", text: "下载 Windows 版", platform: "windows" });
+                return;
+            }
+
+            set({ symbol: "↓", text: "下载客户端", platform: "unknown" });
+        });
+    </script>
+</head>
+
+<body class="overflow-x-hidden bg-white antialiased dark:bg-black">
+    <main
+        class="relative flex min-h-screen items-center justify-center overflow-hidden bg-white px-4 pt-20 pb-4 md:pt-40 md:pb-8 dark:bg-black">
+        <div
+            class="pointer-events-none absolute inset-0 flex mask-[radial-gradient(circle_at_center,white_0%,white_30%,transparent_70%)]">
+            <div
+                class="noise absolute inset-0 scale-[1.2] mask-[radial-gradient(#fff,transparent_75%)] bg-size-[20%] opacity-[0.05]">
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+
+        <section class="relative z-10 mx-auto w-full max-w-7xl text-center">
+            <div class="animate-fade-up relative mx-auto mb-6 w-fit overflow-hidden rounded-full p-px">
+                <div
+                    class="glow absolute top-1/2 left-1/2 h-5 w-75 rounded-full bg-linear-to-r from-transparent via-transparent to-blue-500">
+                </div>
+                <div
+                    class="relative z-10 rounded-full bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 select-none dark:bg-neutral-800 dark:text-neutral-100">
+                    智慧教材 2.0 全新发布
+                </div>
+            </div>
+
+            <h1 id="hero-title"
+                class="animate-fade-up text-3xl font-bold tracking-tight text-neutral-800 [animation-delay:80ms] md:text-4xl lg:text-7xl dark:text-neutral-100">
+                智慧教材
+            </h1>
+
+            <h2
+                class="animate-fade-up mt-5 text-2xl font-semibold text-neutral-700 [animation-delay:120ms] md:text-3xl lg:text-5xl dark:text-neutral-200">
+                打破知识壁垒，探索自主学习
+            </h2>
+
+            <p
+                class="animate-fade-up mx-auto mt-4 max-w-lg text-sm text-neutral-600 [animation-delay:160ms] md:text-xl dark:text-neutral-400">
+                一键下载中小学智慧教育平台最新教材及教学资源
+            </p>
+
+            <div class="animate-fade-up mt-8 flex flex-col items-center gap-4 [animation-delay:240ms]">
+                <button
+                    class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-neutral-900 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
+                    type="button" data-download>
+                    <span data-icon>↓</span>
+                    <span data-label>下载客户端</span>
+                </button>
+
+                <p class="text-xs text-black dark:text-white">
+                    支持 Windows 和 macOS 系统
+                </p>
+            </div>
+
+            <div class="mt-12 flex w-full justify-center bg-white dark:bg-black">
+                <div
+                    class="animate-preview relative w-full overflow-hidden rounded-xl mask-[linear-gradient(to_bottom,white,white_40%,transparent)] shadow-2xl [animation-delay:320ms]">
+                    <picture>
+                        <source srcset="./dark.png" media="(prefers-color-scheme: dark)" />
+                        <img class="w-full" src="./light.png" width="1024" height="576" />
+                    </picture>
+                    <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-50"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

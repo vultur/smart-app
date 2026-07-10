@@ -1,0 +1,126 @@
+name: Release server
+run-name: release-${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - "server-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: build ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows-x64
+            os: windows-2025-vs2026
+          - name: macOS-x64
+            os: macos-26-intel
+          - name: macOS-arm64
+            os: macos-26
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          repository: vultur/smart-server
+          token: ${{ secrets.REPO_TOKEN }}
+          path: smart-server
+
+      - name: checkout data
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          repository: vultur/smart-data
+          path: smart-server/smart-data
+
+      - name: setup node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: install dependencies
+        working-directory: smart-server
+        run: npm install
+
+      - name: package server
+        working-directory: smart-server
+        run: npm run package:server
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: server-${{ matrix.name }}
+          path: smart-server/dist/server-*.zip
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: dist
+          pattern: server-*
+          merge-multiple: true
+
+      - name: publish release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Release ${{ github.ref_name }}
+          files: dist/*
+          tag_name: ${{ github.ref_name }}
+          overwrite_files: true
+          make_latest: false
+
+  update:
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout app
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: update version
+        shell: bash
+        run: |
+          git pull --rebase origin main
+
+          node -e '
+            const fs = require("node:fs");
+
+            const file = "version.json";
+            const version = fs.existsSync(file)
+              ? JSON.parse(fs.readFileSync(file, "utf8"))
+              : {};
+
+            version.server = process.env.GITHUB_REF_NAME.replace(/^server-/, "");
+            fs.writeFileSync(file, JSON.stringify(version, null, 4) + "\n");
+          '
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add version.json
+          git commit -m "release: ${{ github.ref_name }}" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

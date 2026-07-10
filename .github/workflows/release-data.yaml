@@ -1,0 +1,84 @@
+name: Release data
+run-name: release-${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - "data-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout data
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          repository: vultur/smart-data
+          path: smart-data
+
+      - name: package data
+        shell: bash
+        working-directory: smart-data
+        run: |
+          zip -r "../${GITHUB_REF_NAME}.zip" . \
+            -x "*.zip" \
+            -x ".git/*" \
+            -x ".github/*"
+
+      - name: publish release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Release ${{ github.ref_name }}
+          files: ${{ github.ref_name }}.zip
+          tag_name: ${{ github.ref_name }}
+          overwrite_files: true
+          make_latest: false
+
+  update:
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout app
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: update version
+        shell: bash
+        run: |
+          git pull --rebase origin main
+
+          node -e '
+            const fs = require("node:fs");
+
+            const file = "version.json";
+            const version = fs.existsSync(file)
+              ? JSON.parse(fs.readFileSync(file, "utf8"))
+              : {};
+
+            version.data = process.env.GITHUB_REF_NAME.replace(/^data-/, "");
+            fs.writeFileSync(file, JSON.stringify(version, null, 4) + "\n");
+          '
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add version.json
+          git commit -m "release: ${{ github.ref_name }}" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

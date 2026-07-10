@@ -1,0 +1,95 @@
+name: Active account
+run-name: active-${{ inputs.shard }}.${{ inputs.line }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      shard:
+        required: true
+        type: string
+      line:
+        required: true
+        type: string
+      payload:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  active:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: git pull --rebase origin main
+
+      - uses: actions/github-script@v9
+        env:
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        with:
+          script: |
+            const fs = require("node:fs");
+            const crypto = require("node:crypto");
+
+            const payload = JSON.parse(${{ toJson(inputs.payload) }});
+            const { activeCode, deviceInfo, deviceHash } = payload;
+            if (!activeCode || !deviceHash || !deviceInfo) throw new Error("激活参数不完整");
+
+            const publicKey = process.env.PUBLIC_KEY.replace(/\\n/g, "\n");
+            const privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
+
+            const [shard, line, plan, code] = activeCode.split(".");
+            if (!shard || !line || !plan || !code) throw new Error("激活码格式错误");
+
+            const valid = crypto.verify(
+              null,
+              Buffer.from(`${shard}.${line}.${plan}`),
+              publicKey,
+              Buffer.from(code, "base64url")
+            );
+
+            if (!valid) throw new Error("激活码验签失败");
+
+            const path = `users/user-${shard}.jsonl`;
+            if (!fs.existsSync(path)) throw new Error("用户分片不存在");
+
+            const records = fs.readFileSync(path, "utf8").trim().split("\n").filter(Boolean);
+            const account = records[line - 1] ? JSON.parse(records[line - 1]) : null;
+
+            if (!account) throw new Error("用户记录不存在");
+            if (account.active !== activeCode) throw new Error("激活用户不匹配");
+            if (account.device || account.license) throw new Error("当前用户已激活");
+
+            account.key = crypto.randomBytes(32).toString("base64url");
+
+            const signature = crypto
+              .sign(null, Buffer.from(`${plan}.1.${deviceHash}`), privateKey)
+              .toString("base64url");
+
+            account.device = deviceInfo;
+            account.license = `${plan}.1.${deviceHash}.${signature}`;
+            account.active_at = new Date().toISOString();
+
+            records[line - 1] = JSON.stringify(account);
+            fs.writeFileSync(path, `${records.join("\n")}\n`);
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add users/user-*.jsonl
+          git commit -m "feat: active account" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

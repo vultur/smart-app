@@ -1,0 +1,83 @@
+name: Create sponsor
+run-name: sponsor-${{ inputs.short_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      short_id:
+        required: true
+        type: string
+      payload:
+        required: true
+        type: string
+      operator:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: git pull --rebase origin main
+
+      - uses: actions/github-script@v9
+        env:
+          OPERATOR_KEY: ${{ secrets.OPERATOR_KEY }}
+        with:
+          script: |
+            const fs = require("node:fs");
+            const crypto = require("node:crypto");
+
+            const operatorKey = process.env.OPERATOR_KEY.replace(/\\n/g, "\n");
+            const operator = ${{ toJson(inputs.operator) }};
+            const operation = crypto.verify(
+              null,
+              Buffer.from("vultur"),
+              operatorKey,
+              Buffer.from(operator, "base64url")
+            );
+
+            if (!operation) throw new Error("暂无操作权限");
+
+            const record = JSON.parse(${{ toJson(inputs.payload) }});
+            const shortId = ${{ toJson(inputs.short_id) }};
+            if (record.short_id !== shortId) throw new Error("用户信息不一致");
+            if (!record.short_id || !record.sec_uid) throw new Error("缺少用户信息");
+
+            const donate = Number(record.donate);
+            if (!Number.isFinite(donate) || donate <= 0) throw new Error("金额无效");
+
+            const sponsor = {
+              nickname: record.nickname,
+              short_id: record.short_id,
+              sec_uid: record.sec_uid,
+              avatar: record.avatar,
+              donate,
+            };
+
+            const file = "sponsor.jsonl";
+            fs.appendFileSync(file, `${JSON.stringify(sponsor)}\n`);
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add sponsor.jsonl
+          git commit -m "feat: create sponsor" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

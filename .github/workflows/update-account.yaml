@@ -1,0 +1,154 @@
+name: Update account
+run-name: ${{ inputs.action }}-${{ inputs.shard }}.${{ inputs.line }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      shard:
+        required: true
+        type: string
+      line:
+        required: true
+        type: string
+      action:
+        required: true
+        type: choice
+        options:
+          - patch
+          - reset
+          - update
+          - disable
+      payload:
+        required: true
+        type: string
+      operator:
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: git pull --rebase origin main
+
+      - uses: actions/github-script@v9
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          OPERATOR_KEY: ${{ secrets.OPERATOR_KEY }}
+        with:
+          script: |
+            const fs = require("node:fs");
+            const crypto = require("node:crypto");
+
+            const privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
+            const operatorKey = process.env.OPERATOR_KEY.replace(/\\n/g, "\n");
+
+            const line = ${{ toJson(inputs.line) }};
+            const shard = ${{ toJson(inputs.shard) }};
+
+            const action = ${{ toJson(inputs.action) }};
+            const payload = JSON.parse(${{ toJson(inputs.payload) }});
+
+            const operation = () => {
+              const operator = ${{ toJson(inputs.operator) }};
+              if (!operator) return false;
+
+              return crypto.verify(
+                null,
+                Buffer.from("vultur"),
+                operatorKey,
+                Buffer.from(operator, "base64url")
+              );
+            };
+
+            const path = `users/user-${shard}.jsonl`;
+            if (!fs.existsSync(path)) throw new Error("用户分片不存在");
+
+            const records = fs.readFileSync(path, "utf8").trim().split("\n").filter(Boolean);
+            const account = records[line - 1] ? JSON.parse(records[line - 1]) : null;
+            if (!account) throw new Error("用户记录不存在");
+
+            if (action === "patch") {
+              if(!operation()) throw new Error("暂无操作权限");
+
+              const plan = Number(payload.plan);
+
+              if (account.license) {
+                const [, state, device] = account.license.split(".");
+
+                const signature = crypto
+                  .sign(null, Buffer.from(`${plan}.${state}.${device}`), privateKey)
+                  .toString("base64url");
+
+                account.license = `${plan}.${state}.${device}.${signature}`;
+              } else {
+                const [, , , code] = account.active?.split(".") ?? [];
+
+                const signature = crypto
+                  .sign(null, Buffer.from(`${shard}.${line}.${plan}`), privateKey)
+                  .toString("base64url");
+
+                account.active = `${shard}.${line}.${plan}.${signature}`;
+              }
+
+              account.update_at = new Date().toISOString();
+            }
+
+            if(action === "reset") {
+              if(!operation()) throw new Error("暂无操作权限");
+
+              account.device = "";
+              account.license = "";
+              account.update_at = new Date().toISOString();
+              account.latest_at = "";
+              account.address = "";
+            }
+
+            if(action === "disable") {
+              if(!operation()) throw new Error("暂无操作权限");
+
+              const [plan, , device] = account.license?.split(".") ?? [];
+              if (!plan || !device) throw new Error("用户授权不存在");
+
+              const signature = crypto
+                .sign(null, Buffer.from(`${plan}.2.${device}`), privateKey)
+                .toString("base64url");
+
+              account.license = `${plan}.2.${device}.${signature}`;
+              account.update_at = new Date().toISOString();
+            }
+
+            if(action === "update") {
+              const { address, download, latest_at } = payload;
+
+              account.download = account.download + download;
+              account.latest_at = latest_at;
+              if (address) account.address = address;
+            }
+
+            records[line - 1] = JSON.stringify(account);
+            fs.writeFileSync(path, `${records.join("\n")}\n`);
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add users/user-*.jsonl
+          git commit -m "chore: update account" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done

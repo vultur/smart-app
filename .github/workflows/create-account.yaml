@@ -1,0 +1,124 @@
+name: Create account
+run-name: create-${{ inputs.short_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      short_id:
+        required: true
+        type: string
+      payload:
+        required: true
+        type: string
+      operator:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - run: git pull --rebase origin main
+
+      - uses: actions/github-script@v9
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          OPERATOR_KEY: ${{ secrets.OPERATOR_KEY }}
+        with:
+          script: |
+            const fs = require("node:fs");
+            const crypto = require("node:crypto");
+
+            const privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
+            const operatorKey = process.env.OPERATOR_KEY.replace(/\\n/g, "\n");
+
+            const record = JSON.parse(${{ toJson(inputs.payload) }});
+            const manifest = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
+
+            const operator = ${{ toJson(inputs.operator) }};
+            const operation = crypto.verify(
+              null,
+              Buffer.from("vultur"),
+              operatorKey,
+              Buffer.from(operator, "base64url")
+            );
+
+            if (!operation) throw new Error("暂无操作权限");
+
+            const active = manifest.shards.find((item) => item.shard === manifest.active);
+            const create = !active || active.count >= manifest.limit;
+            const shard = create
+              ? {
+                  path: `users/user-${String(manifest.next).padStart(6, "0")}.jsonl`,
+                  shard: String(manifest.next).padStart(6, "0"),
+                  count: 0,
+                  default: true,
+                }
+              : active;
+
+            const payload = `${shard.shard}.${shard.count + 1}.${record.plan}`;
+            const signature = crypto
+              .sign(null, Buffer.from(payload), privateKey)
+              .toString("base64url");
+
+            const account = {
+              nickname: record.nickname,
+              short_id: record.short_id,
+              sec_uid: record.sec_uid,
+              avatar: record.avatar,
+              active: `${payload}.${signature}`,
+              device: "",
+              license: "",
+              download: 0,
+              create_at: new Date().toISOString(),
+              active_at: "",
+              update_at: "",
+              latest_at: "",
+              address: "",
+              key: "",
+            };
+
+            const content = fs.existsSync(shard.path)
+              ? fs.readFileSync(shard.path, "utf8").trim()
+              : "";
+
+            fs.writeFileSync(
+              shard.path,
+              `${content ? `${content}\n` : ""}${JSON.stringify(account)}\n`
+            );
+
+            manifest.shards = manifest.shards.map((item) => ({
+              ...item,
+              count: item.shard === shard.shard ? item.count + 1 : item.count,
+              default: item.shard === shard.shard,
+            }));
+
+            if (create) manifest.shards.push({ ...shard, count: 1 });
+
+            manifest.next = create ? manifest.next + 1 : manifest.next;
+            manifest.active = shard.shard;
+
+            fs.writeFileSync("manifest.json", `${JSON.stringify(manifest, null, 4)}\n`);
+
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add manifest.json users/user-*.jsonl
+          git commit -m "feat: create account" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main
+            git push && break
+
+            if [ "$i" = "3" ]; then
+              exit 1
+            fi
+
+            sleep $((i * 5))
+          done
