@@ -10,3 +10,13 @@ ENOENT: no such file or directory, open 'C:\Users\ADMINI~1\AppData\Local\Temp\3G
 EBUSY: resource busy or locked, unlink 'C:\Users\lenovo\Downloads\智慧教材\精品课\小学\数学\人教版\二年级\上册\二、1~6的表内乘法\5的乘法口诀\01.5的乘法口诀.mp4.download'
 2026-07-16T02:58:11.480Z	ERROR	DESKTOP	下载任务失败
 EBUSY: resource busy or locked, unlink 'C:\Users\Administrator\Downloads\智慧教材\视频课程\初中（五•四学制）\八年级\物理\沪教版\下册\第四章 机械和功\4.1 简单机械\杠杆\01.简单机械①：杠杆.mp4.download'
+2026-07-16T03:06:34.776Z	ERROR	DESKTOP	下载视频失败
+net::ERR_CONNECTION_RESET
+2026-07-16T03:06:34.795Z	ERROR	DESKTOP	下载任务失败
+net::ERR_CONNECTION_RESET
+2026-07-16T05:14:49.236Z	ERROR	DESKTOP	下载视频失败
+net::ERR_CONNECTION_RESET
+2026-07-16T05:14:49.237Z	ERROR	DESKTOP	下载视频失败
+net::ERR_CONNECTION_RESET
+2026-07-16T05:14:49.264Z	ERROR	DESKTOP	下载任务失败
+net::ERR_CONNECTION_RESET
