@@ -26,3 +26,13 @@ ENOSPC: no space left on device, write
 ENOSPC: no space left on device, write
 2026-07-17T08:13:22.989Z	ERROR	DESKTOP	下载视频失败
 视频文件合并失败
+2026-07-17T09:08:42.352Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\语文\统编版\下册\第二单元·阅读\3 我多想去看看\第一课时\.01.我多想去看看\000100-784c8a26-d6fb-72ee-5790-ad937889ed71-1920x1080-true-c4bec7ac4b6f5fec23efd479744a203c-b0708821b89d426eba33ced75724108d-00100.ts'
+2026-07-17T09:08:42.356Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\语文\统编版\下册\第二单元·阅读\3 我多想去看看\第一课时\.01.我多想去看看\000100-784c8a26-d6fb-72ee-5790-ad937889ed71-1920x1080-true-c4bec7ac4b6f5fec23efd479744a203c-b0708821b89d426eba33ced75724108d-00100.ts'
+2026-07-17T09:08:42.541Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\语文\统编版\下册\第二单元·阅读\1 热爱中国共产党\第二课时\.01.热爱中国共产党\000109-45228245-8225-157d-bc23-7fa313eae6f0-1920x1080-true-c7984c7cf97ef4d4bd9c9e8b96fd1fcb-1885c5738e1740d28eb2685ca70cfe06-00109.ts'
+2026-07-17T09:08:42.542Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\语文\统编版\下册\第二单元·阅读\1 热爱中国共产党\第二课时\.01.热爱中国共产党\000109-45228245-8225-157d-bc23-7fa313eae6f0-1920x1080-true-c7984c7cf97ef4d4bd9c9e8b96fd1fcb-1885c5738e1740d28eb2685ca70cfe06-00109.ts'
+2026-07-17T09:08:42.560Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\语文\统编版\下册\第二单元·阅读\2 吃水不忘挖井人\第二课时\.01.吃水不忘挖井人\000086-c736cd01-0719-a202-c5e4-deecb08ba44e-1920x1080-true-f47c7912d40d42123fa6448edb60dc77-ab64a7fa8e47474e8f238ebdd6ad70c2-00086.ts'
