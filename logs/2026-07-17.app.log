@@ -12,3 +12,7 @@ ENOENT: no such file or directory, open 'C:\Users\25012\Downloads\智慧教材\�
 ENOENT: no such file or directory, open 'C:\Users\25012\Downloads\智慧教材\视频课程\小学\六年级\语文\统编版\下册\古诗词诵读\10 清平乐\.01.清平乐\000020-2dd518ef-588f-cee7-4f1e-0ce5f3b94d85-1920x1080-true-d60633f19af9486ce3ce3d0f043537c2-b842d74f1bd24f12bc7fec2f23d3f4f0-00020.ts'
 2026-07-17T01:40:45.222Z	ERROR	DESKTOP	下载视频失败
 ENOENT: no such file or directory, open 'C:\Users\25012\Downloads\智慧教材\视频课程\小学\六年级\语文\统编版\下册\古诗词诵读\8 卜算子·送鲍浩然之浙东\.01.卜算子·送鲍浩然之浙东\000026-e733bac0-a6f2-ea88-ed70-74eadc1cbfff-1920x1080-true-9a89aab0c7e557bb7377616fd5037ca0-bc63dfdfd7e34215a30edfcc941291c8-00026.ts'
+2026-07-17T03:07:09.177Z	ERROR	DESKTOP	下载视频失败
+spawn C:\Users\Administrator\AppData\Local\Temp\360zip$Temp\360$0\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
+2026-07-17T03:07:09.202Z	ERROR	DESKTOP	下载任务失败
+spawn C:\Users\Administrator\AppData\Local\Temp\360zip$Temp\360$0\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
