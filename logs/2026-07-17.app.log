@@ -16,3 +16,13 @@ ENOENT: no such file or directory, open 'C:\Users\25012\Downloads\智慧教材\�
 spawn C:\Users\Administrator\AppData\Local\Temp\360zip$Temp\360$0\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
 2026-07-17T03:07:09.202Z	ERROR	DESKTOP	下载任务失败
 spawn C:\Users\Administrator\AppData\Local\Temp\360zip$Temp\360$0\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
+2026-07-17T08:10:48.903Z	ERROR	DESKTOP	下载视频失败
+视频文件合并失败
+2026-07-17T08:10:49.103Z	ERROR	DESKTOP	下载任务失败
+视频文件合并失败
+2026-07-17T08:13:22.324Z	ERROR	DESKTOP	下载视频失败
+ENOSPC: no space left on device, write
+2026-07-17T08:13:22.339Z	ERROR	DESKTOP	下载任务失败
+ENOSPC: no space left on device, write
+2026-07-17T08:13:22.989Z	ERROR	DESKTOP	下载视频失败
+视频文件合并失败
