@@ -16,3 +16,13 @@ ENOENT: no such file or directory, rename 'E:\下载\智慧教材\视频课程\�
 EBUSY: resource busy or locked, unlink 'D:\Backup\Downloads\智慧教材\电子教材\小学\英语\北京版\六年级\义务教育教科书·英语（一年级起点）六年级上册\义务教育教科书·英语（一年级起点）六年级上册.pdf'
 2026-07-18T03:12:01.999Z	ERROR	DESKTOP	下载任务失败
 EBUSY: resource busy or locked, unlink 'D:\Backup\Downloads\智慧教材\电子教材\小学\英语\北京版\六年级\义务教育教科书·英语（一年级起点）六年级上册\义务教育教科书·英语（一年级起点）六年级上册.pdf'
+2026-07-18T05:46:14.449Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\and\Downloads\智慧教材\视频课程\小学\二年级\语文\统编版\上册\第一单元·阅读\1 小蝌蚪找妈妈\第二课时\.01.小蝌蚪找妈妈\000047-cf6c9ff8-33e2-6a56-3c77-18e5bc27cf11-1920x1080-true-203619c438f002c033c12fc17b7be858-9b3a309d676c4090b0780427eea35bff-00047.ts'
+2026-07-18T05:46:14.451Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\and\Downloads\智慧教材\视频课程\小学\二年级\语文\统编版\上册\第一单元·阅读\1 小蝌蚪找妈妈\第二课时\.01.小蝌蚪找妈妈\000047-cf6c9ff8-33e2-6a56-3c77-18e5bc27cf11-1920x1080-true-203619c438f002c033c12fc17b7be858-9b3a309d676c4090b0780427eea35bff-00047.ts'
+2026-07-18T05:46:15.717Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\and\Downloads\智慧教材\视频课程\小学\二年级\语文\统编版\上册\第一单元·阅读\3 植物妈妈有办法\第一课时\.01.植物妈妈有办法\000023-2f10fb9f-67c1-c305-198a-f12c5e41d76f-1920x1080-true-e1fd2c22371e3b573676d24d6bcaa073-adfe1e3ba9eb4f389274b6e51bea7e1a-00023.ts'
+2026-07-18T05:46:15.718Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\and\Downloads\智慧教材\视频课程\小学\二年级\语文\统编版\上册\第一单元·阅读\3 植物妈妈有办法\第一课时\.01.植物妈妈有办法\000023-2f10fb9f-67c1-c305-198a-f12c5e41d76f-1920x1080-true-e1fd2c22371e3b573676d24d6bcaa073-adfe1e3ba9eb4f389274b6e51bea7e1a-00023.ts'
+2026-07-18T05:46:15.908Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\and\Downloads\智慧教材\视频课程\小学\二年级\语文\统编版\上册\第一单元·阅读\2 我是什么\第一课时\.01.我是什么\000061-97669851-4b97-d62a-2be8-3a532e4ebd31-1920x1080-true-f4603b1367b411c0df6c10f693fd7089-bcd1c52eaaa64cf2b6e15237878fd84d-00061.ts'
