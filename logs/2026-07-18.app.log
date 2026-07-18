@@ -52,3 +52,13 @@ EBUSY: resource busy or locked, unlink 'C:\Users\Huazi\Downloads\智慧教材\�
 ENOENT: no such file or directory, open 'C:\Users\Huazi\Downloads\智慧教材\视频课程\初中\八年级\物理\人教版\上册\第一章 机械运动\第一节 长度和时间的测量\.01.长度和时间的测量\000006-ad9865e0-2b8a-f559-bea0-32959b1b769f-1920x1080-true-c85970cff868acc3a5c84d2762098c0a-da301838882944409265ca455e779b37-00006.ts'
 2026-07-18T09:21:25.853Z	ERROR	DESKTOP	下载任务失败
 ENOENT: no such file or directory, open 'C:\Users\Huazi\Downloads\智慧教材\视频课程\初中\八年级\物理\人教版\上册\第一章 机械运动\第一节 长度和时间的测量\.01.长度和时间的测量\000006-ad9865e0-2b8a-f559-bea0-32959b1b769f-1920x1080-true-c85970cff868acc3a5c84d2762098c0a-da301838882944409265ca455e779b37-00006.ts'
+2026-07-18T13:51:54.897Z	ERROR	DESKTOP	下载视频失败
+视频分片下载失败
+2026-07-18T13:51:54.900Z	ERROR	DESKTOP	下载视频失败
+net::ERR_SSL_PROTOCOL_ERROR
+2026-07-18T13:51:54.906Z	ERROR	DESKTOP	下载视频失败
+net::ERR_SSL_PROTOCOL_ERROR
+2026-07-18T13:51:55.136Z	ERROR	DESKTOP	下载任务失败
+net::ERR_SSL_PROTOCOL_ERROR
+2026-07-18T13:51:55.140Z	ERROR	DESKTOP	下载任务失败
+视频分片下载失败
