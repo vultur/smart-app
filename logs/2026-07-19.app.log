@@ -8,3 +8,13 @@
 请求资源失败
 2026-07-19T03:35:29.336Z	ERROR	DESKTOP	下载任务失败
 请求资源失败
+2026-07-19T05:09:11.130Z	ERROR	DESKTOP	下载视频失败
+ENOSPC: no space left on device, open 'C:\Users\Administrator\Downloads\智慧教材\视频课程\小学\一年级\数学\人教版\上册\三 认识立体图形\拼一拼\.01.拼一拼\000019-7f2ff5a5-d69a-8feb-efbe-c823c51c1068-1920x1080-true-0443c8899f38ee99b9cc9a42c54f6019-b08791b12ef44a7fbe15d3f84baf2a5b-00019.ts'
+2026-07-19T05:09:11.144Z	ERROR	DESKTOP	下载视频失败
+ENOSPC: no space left on device, write
+2026-07-19T05:09:11.147Z	ERROR	DESKTOP	下载视频失败
+ENOSPC: no space left on device, write
+2026-07-19T05:09:11.152Z	ERROR	DESKTOP	下载视频失败
+视频文件合并失败
+2026-07-19T05:09:11.172Z	ERROR	DESKTOP	下载视频失败
+视频文件合并失败
