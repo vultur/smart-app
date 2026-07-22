@@ -28,3 +28,13 @@ net::ERR_CONNECTION_CLOSED
 请求资源失败
 2026-07-22T02:09:26.794Z	ERROR	DESKTOP	下载任务失败
 请求资源失败
+2026-07-22T02:15:04.552Z	ERROR	DESKTOP	下载文件失败
+ENOENT: no such file or directory, rename 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\教科版（主编：龚亚夫&鲁宗干）\四年级\（根据2022年版课程标准修订）义务教育教科书·英语 四年级下册\音频资源\Hi! Phonics.mp3.download' -> 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\教科版（主编：龚亚夫&鲁宗干）\四年级\（根据2022年版课程标准修订）义务教育教科书·英语 四年级下册\音频资源\Hi! Phonics.mp3'
+2026-07-22T02:15:04.553Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, rename 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\教科版（主编：龚亚夫&鲁宗干）\四年级\（根据2022年版课程标准修订）义务教育教科书·英语 四年级下册\音频资源\Hi! Phonics.mp3.download' -> 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\教科版（主编：龚亚夫&鲁宗干）\四年级\（根据2022年版课程标准修订）义务教育教科书·英语 四年级下册\音频资源\Hi! Phonics.mp3'
+2026-07-22T02:25:23.246Z	ERROR	DESKTOP	下载文件失败
+ENOENT: no such file or directory, rename 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 2 Dream toys.mp3.download' -> 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 2 Dream toys.mp3'
+2026-07-22T02:25:23.247Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, rename 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 2 Dream toys.mp3.download' -> 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 2 Dream toys.mp3'
+2026-07-22T02:25:25.437Z	ERROR	DESKTOP	下载文件失败
+ENOENT: no such file or directory, rename 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 6 Our pets.mp3.download' -> 'C:\Users\alana\Downloads\智慧教材\电子教材\小学\英语\人教大同版\三年级\（根据2022年版课程标准修订）义务教育教科书·英语 三年级 下册\音频资源\Unit 6 Our pets.mp3'
