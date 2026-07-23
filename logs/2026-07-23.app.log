@@ -8,3 +8,7 @@
 视频文件合并失败
 2026-07-23T00:59:51.677Z	ERROR	DESKTOP	下载视频失败
 ENOENT: no such file or directory, open 'C:\Users\MaZiYan\Downloads\智慧教材\视频课程\小学\四年级\英语\冀教版\上册\Unit 3 Sports\Lesson 2 The sports meet is fun\.01.Lesson 2 The sports meet is fun.\000073-f2d2e764-a468-c34d-1aef-76c2f94a4ad0-1920x1080-true-c90570ff73eea854e3a0deb5ae248a9d-3cff44a0196b4e19846df64d659c5ed7-00073.ts'
+2026-07-23T03:40:42.808Z	ERROR	DESKTOP	York_G	下载文件失败
+EBUSY: resource busy or locked, unlink 'C:\Users\Administrator\Downloads\智慧教材\电子教材\小学\数学\北师大版\四年级\义务教育教科书·数学四年级上册\义务教育教科书·数学四年级上册.pdf'
+2026-07-23T03:40:42.810Z	ERROR	DESKTOP	York_G	下载任务失败
+EBUSY: resource busy or locked, unlink 'C:\Users\Administrator\Downloads\智慧教材\电子教材\小学\数学\北师大版\四年级\义务教育教科书·数学四年级上册\义务教育教科书·数学四年级上册.pdf'
