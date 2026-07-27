@@ -8,3 +8,5 @@ ENOENT: no such file or directory, rename 'C:\Users\Administrator\Downloads\智�
 ENOENT: no such file or directory, rename 'C:\Users\Administrator\Downloads\智慧教材\电子教材\小学\数学\苏教版\五年级\义务教育教科书·数学五年级上册\义务教育教科书·数学五年级上册.pdf.download' -> 'C:\Users\Administrator\Downloads\智慧教材\电子教材\小学\数学\苏教版\五年级\义务教育教科书·数学五年级上册\义务教育教科书·数学五年级上册.pdf'
 2026-07-27T03:31:46.353Z	ERROR	DESKTOP	下载文件失败
 ENOSPC: no space left on device, write
+2026-07-27T06:19:16.195Z	ERROR	DESKTOP	下载任务失败
+请求资源失败
