@@ -8,3 +8,11 @@ spawn C:\Users\Administrator\AppData\Local\Temp\Rar$EXa18376.43496.rartemp\resou
 spawn C:\Users\Administrator\AppData\Local\Temp\Rar$EXa18376.43496.rartemp\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
 2026-07-28T06:32:18.088Z	ERROR	DESKTOP	下载视频失败
 spawn C:\Users\Administrator\AppData\Local\Temp\Rar$EXa18376.43496.rartemp\resources\app\node_modules\ffmpeg-static\ffmpeg.exe ENOENT
+2026-07-28T01:27:12.882Z	ERROR	DESKTOP	下载文件失败
+ENOSPC: no space left on device, write
+2026-07-28T01:27:12.999Z	ERROR	DESKTOP	下载任务失败
+ENOSPC: no space left on device, write
+2026-07-28T01:27:13.021Z	ERROR	DESKTOP	下载文件失败
+ENOSPC: no space left on device, write
+2026-07-28T01:27:13.021Z	ERROR	DESKTOP	下载任务失败
+ENOSPC: no space left on device, write
