@@ -2,3 +2,7 @@
 net::ERR_CONNECTION_RESET
 2026-07-30T01:56:06.064Z	ERROR	DESKTOP	下载任务失败
 net::ERR_CONNECTION_RESET
+2026-07-30T03:08:01.069Z	ERROR	DESKTOP	下载文件失败
+EBUSY: resource busy or locked, unlink 'C:\Users\56817\Downloads\智慧教材\电子教材\高中\数学\人教A版\普通高中教科书·数学（A版）必修 第二册\普通高中教科书·数学（A版）必修 第二册.pdf'
+2026-07-30T03:08:01.074Z	ERROR	DESKTOP	下载任务失败
+EBUSY: resource busy or locked, unlink 'C:\Users\56817\Downloads\智慧教材\电子教材\高中\数学\人教A版\普通高中教科书·数学（A版）必修 第二册\普通高中教科书·数学（A版）必修 第二册.pdf'
