@@ -1,0 +1,10 @@
+2026-07-31T03:17:38.445Z	ERROR	DESKTOP	下载任务失败
+请求资源失败
+2026-07-31T03:17:48.415Z	ERROR	DESKTOP	下载任务失败
+请求资源失败
+2026-07-31T03:17:50.426Z	ERROR	DESKTOP	下载任务失败
+请求资源失败
+2026-07-31T03:21:11.508Z	ERROR	DESKTOP	下载视频失败
+ENOENT: no such file or directory, open 'C:\Users\HP\Downloads\智慧教材\视频课程\高中\数学\人教A版\选择性必修 第三册\第六章 计数原理\6.3 二项式定理\第一课时\.01.二项式定理\000040-81d535ea-75b2-47aa-a8bf-ebaf0341aedf-1280x720-true-6a3069d93bd4a772565fc7f416b42828-ee5c85a458934e1291e360befe66319a-00040.ts'
+2026-07-31T03:21:11.515Z	ERROR	DESKTOP	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\HP\Downloads\智慧教材\视频课程\高中\数学\人教A版\选择性必修 第三册\第六章 计数原理\6.3 二项式定理\第一课时\.01.二项式定理\000040-81d535ea-75b2-47aa-a8bf-ebaf0341aedf-1280x720-true-6a3069d93bd4a772565fc7f416b42828-ee5c85a458934e1291e360befe66319a-00040.ts'
