@@ -12,3 +12,11 @@
 视频文件合并失败
 2026-08-02T01:47:31.701Z	ERROR	DESKTOP	下载视频失败
 视频文件合并失败
+2026-08-03T08:02:48.464Z	ERROR	DESKTOP	下载文件失败
+EBUSY: resource busy or locked, unlink 'C:\Users\庞永胜\Downloads\智慧教材\电子教材\初中\道德与法治\统编版\九年级\义务教育教科书·道德与法治九年级上册\义务教育教科书·道德与法治九年级上册.pdf'
+2026-08-03T08:02:48.467Z	ERROR	DESKTOP	下载任务失败
+EBUSY: resource busy or locked, unlink 'C:\Users\庞永胜\Downloads\智慧教材\电子教材\初中\道德与法治\统编版\九年级\义务教育教科书·道德与法治九年级上册\义务教育教科书·道德与法治九年级上册.pdf'
+2026-08-03T08:28:29.881Z	ERROR	DESKTOP	下载文件失败
+EBUSY: resource busy or locked, unlink 'C:\Users\庞永胜\Downloads\智慧教材\电子教材\初中\道德与法治\统编版\九年级\义务教育教科书·道德与法治九年级上册\义务教育教科书·道德与法治九年级上册.pdf'
+2026-08-03T08:28:29.881Z	ERROR	DESKTOP	下载任务失败
+EBUSY: resource busy or locked, unlink 'C:\Users\庞永胜\Downloads\智慧教材\电子教材\初中\道德与法治\统编版\九年级\义务教育教科书·道德与法治九年级上册\义务教育教科书·道德与法治九年级上册.pdf'
