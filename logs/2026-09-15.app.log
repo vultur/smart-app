@@ -30,3 +30,13 @@ Cannot read properties of undefined (reading 'plan')
 Cannot read properties of undefined (reading 'plan')
 2026-09-15T16:04:30.492Z	ERROR	DESKTOP	-	下载文件失败
 Cannot read properties of undefined (reading 'plan')
+2026-09-15T16:12:21.110Z	ERROR	DESKTOP	-	下载文件失败
+net::ERR_CACHE_READ_FAILURE
+2026-09-15T16:12:21.111Z	ERROR	DESKTOP	-	下载任务失败
+net::ERR_CACHE_READ_FAILURE
+2026-09-15T16:12:41.545Z	ERROR	DESKTOP	-	下载文件失败
+Cannot read properties of undefined (reading 'plan')
+2026-09-15T16:12:41.545Z	ERROR	DESKTOP	-	下载任务失败
+Cannot read properties of undefined (reading 'plan')
+2026-09-15T16:13:20.012Z	ERROR	DESKTOP	-	下载文件失败
+Cannot read properties of undefined (reading 'plan')
