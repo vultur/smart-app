@@ -1,0 +1,10 @@
+2026-10-15T17:22:13.968Z	ERROR	DESKTOP	64737726906	下载任务失败
+相同文件正在下载
+2026-10-15T18:13:34.497Z	ERROR	DESKTOP	64737726906	下载视频失败
+ENOSPC: no space left on device, write
+2026-10-15T18:13:34.500Z	ERROR	DESKTOP	64737726906	下载任务失败
+ENOSPC: no space left on device, write
+2026-10-15T18:13:36.911Z	ERROR	DESKTOP	64737726906	下载文件失败
+ENOSPC: no space left on device, write
+2026-10-15T18:13:36.911Z	ERROR	DESKTOP	64737726906	下载任务失败
+ENOSPC: no space left on device, write
