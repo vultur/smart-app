@@ -1,0 +1,4 @@
+2026-10-25T11:57:10.278Z	ERROR	DESKTOP	hbsszh	下载文件失败
+Expected instance of PDFDict, but got instance of undefined
+2026-10-25T11:57:10.279Z	ERROR	DESKTOP	hbsszh	下载任务失败
+Expected instance of PDFDict, but got instance of undefined
