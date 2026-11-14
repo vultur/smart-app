@@ -1,0 +1,10 @@
+2026-11-14T17:10:27.812Z	ERROR	DESKTOP	2116999191	下载视频失败
+ENOSPC: no space left on device, write
+2026-11-14T17:10:27.815Z	ERROR	DESKTOP	2116999191	下载视频失败
+ENOSPC: no space left on device, write
+2026-11-14T17:10:27.816Z	ERROR	DESKTOP	2116999191	下载视频失败
+ENOSPC: no space left on device, write
+2026-11-14T17:10:30.326Z	ERROR	DESKTOP	2116999191	下载视频失败
+视频文件合并失败
+2026-11-14T17:10:31.415Z	ERROR	DESKTOP	2116999191	下载任务失败
+ENOSPC: no space left on device, write
