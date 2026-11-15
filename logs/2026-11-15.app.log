@@ -1,0 +1,10 @@
+2026-11-15T04:24:29.027Z	ERROR	DESKTOP	182570861	下载任务失败
+相同文件正在下载
+2026-11-15T04:25:12.729Z	ERROR	DESKTOP	182570861	下载文件失败
+ENOENT: no such file or directory, open 'C:\Users\Lenovo\AppData\Local\Temp\3IAzNnsbfqI779tuEituhcs3NY3\resources\fonts\PuHui-Regular.ttf'
+2026-11-15T04:25:12.729Z	ERROR	DESKTOP	182570861	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\Lenovo\AppData\Local\Temp\3IAzNnsbfqI779tuEituhcs3NY3\resources\fonts\PuHui-Regular.ttf'
+2026-11-15T04:25:48.563Z	ERROR	DESKTOP	182570861	下载文件失败
+ENOENT: no such file or directory, open 'C:\Users\Lenovo\AppData\Local\Temp\3IAzNnsbfqI779tuEituhcs3NY3\resources\fonts\PuHui-Regular.ttf'
+2026-11-15T04:25:48.564Z	ERROR	DESKTOP	182570861	下载任务失败
+ENOENT: no such file or directory, open 'C:\Users\Lenovo\AppData\Local\Temp\3IAzNnsbfqI779tuEituhcs3NY3\resources\fonts\PuHui-Regular.ttf'
