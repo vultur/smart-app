@@ -1,0 +1,6 @@
+2026-11-18T06:56:31.907Z	INFO	DESKTOP	-	bootstrap: 授权加载完成
+2026-11-18T06:56:39.926Z	INFO	DESKTOP	-	bootstrap: 检查更新完成，开始获取访问令牌
+2026-11-18T06:56:39.941Z	INFO	DESKTOP	-	bootstrap: 访问令牌就绪
+2026-11-18T06:56:56.804Z	INFO	DESKTOP	-	bootstrap: Next 服务已启动
+http://127.0.0.1:24287
+2026-11-18T06:56:59.060Z	INFO	DESKTOP	-	bootstrap: 主界面加载完成
